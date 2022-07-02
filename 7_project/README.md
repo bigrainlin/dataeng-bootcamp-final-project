@@ -203,6 +203,7 @@ gcloud compute instances create <name-of-the-vm> --zone=<google-cloud-zone> --im
     * Make sure that the `docker-compose` file is in the folder with `ls`
 1. Make the binary executable with `chmod +x docker-compose`
     * Check the file with `ls` again; it should now be colored green. You should now be able to run it with `./docker-compose version`
+    * If it returns 'docker-compose' not found, install it with command `sudo apt install docker-compose`
 1. Go back to the home folder with `cd ~`
 1. Run `nano .bashrc` to modify your path environment variable:
     1. Scroll to the end of the file
