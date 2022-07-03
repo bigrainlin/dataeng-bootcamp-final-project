@@ -192,6 +192,7 @@ gcloud compute instances create <name-of-the-vm> --zone=<google-cloud-zone> --im
     1. Log out of your SSH session and log back in.
     1. Run `sudo service docker restart`
     1. Run `sudo chmod 666 /var/run/docker.sock`
+    1. Run `docker pull hello-world`
     1. Test that Docker can run successfully with `docker run hello-world`
 ### Docker compose:
 1. Go to https://github.com/docker/compose/releases and copy the URL for the  `docker-compose-linux-x86_64` binary for its latest version.
