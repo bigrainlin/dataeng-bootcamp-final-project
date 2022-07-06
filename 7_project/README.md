@@ -344,7 +344,7 @@ You may now run the `dbt run` command in the bottom prompt to run all models; th
     * Choose the environment you created in the previous step.
     * Optionally, you may click on the _Generate docs?_ checkbox.
     * In the _Commands_ section, add the command `dbt run`
-    * In the _Triggers_ section, inside the _Schedule_ tab, make sure that the _Run on schedule?_ checkbox is checked. Select _custom cron schedule_ and input the string `40 * * * *`; this will run the models every hour on the 40th minute (the DAG runs on the 30th minute, the 10 minute delay is to make sure that the DAG is run successfully).
+    * In the _Triggers_ section, inside the _Schedule_ tab, make sure that the _Run on schedule?_ checkbox is checked. Select _custom cron schedule_ and input the string `0 1 1 * *`; this will run once a month at midnight of the first day of the month (the DAG runs on the 00:00, the one hour delay is to make sure that the DAG is run successfully).
 1. Save the job.
 
 You may now trigger the job manually or you may wait until the scheduled trigger to run it. The first time you run it, 3 new datasets will be added to BigQuery following the same pattern as in the development environment.
