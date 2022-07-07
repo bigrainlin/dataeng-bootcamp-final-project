@@ -334,48 +334,11 @@ You may now run the `dbt run` command in the bottom prompt to run all models; th
 * `<prefix>_staging` hosts the staging views for generating the final end-user tables.
 * `<prefix>_core` hosts the end-user tables.
 
-## Deploying models in dbt Cloud with a Production environment
-
-1. Click on the hamburger menu on the top left and click on _Environments_.
-1. Click on the _New Environment_ button on the top right.
-1. Give the environment a name (`Production` is recommended), make sure that the environment is of type _Deployment_ and in the _Credentials_ section, you may input a name in the _Dataset_ field; this will add a prefix to the schemas, similarly to what we did in when setting up the development environment (`production` is the recommended prefix but any prefix will do, or you may leave it blank).
-1. Create a new job with the following settings:
-    * Give it any name; `dbt run` is recommended.
-    * Choose the environment you created in the previous step.
-    * Optionally, you may click on the _Generate docs?_ checkbox.
-    * In the _Commands_ section, add the command `dbt run`
-    * In the _Triggers_ section, inside the _Schedule_ tab, make sure that the _Run on schedule?_ checkbox is checked. Select _custom cron schedule_ and input the string `0 1 1 * *`; this will run once a month at midnight of the first day of the month (the DAG runs on the 00:00, the one hour delay is to make sure that the DAG is run successfully).
-1. Save the job.
-
-You may now trigger the job manually or you may wait until the scheduled trigger to run it. The first time you run it, 3 new datasets will be added to BigQuery following the same pattern as in the development environment.
-
 ## Creating a dashboard
 
-The dashboard used in this project was generated with [Google Data Studio](https://datastudio.google.com/) (GDS from now on). Dashboards in GDS are called _reports_. Reports grab data from _data sources_. We will need to generate 2 data sources and a report:
 
-1. Generate the data sources.
-    1. Click on the _Create_ button and choose _Data source_.
-    1. Click on the _BigQuery_ connector.
-    1. Choose your Google Cloud project, choose your _production core_ dataset and click on the `users` table. Click on the _Connect_ button at the top.
-    1. You may rename the data source by clicking on the name at the top left of the screen. The default name will be the name of the chosen table.
-    1. Click on the GDS icon on the top left to go back to the GDS front page and repeat all of the previous steps but choose the _production staging_ dataset and the `stg_commits` table.
-1. Generate the report.
-    1. Click on the _Create_ button and choose _Report_.
-    1. If the _Add data to report_ pop-up appears, choose the `My data sources` tab and choose one of the data sources. Click on the _Add to report_ button on the confirmation pop-up.
-    1. Once you're in the report page, click on the _Add data_ button on the top bar and choose the other data source you created.
-    1.  You may delete any default widgets created by GDS.
-1. Add the _Top Github Contributors_ widget.
-    1. Click on the _Add a chart_ button on the top bar and select _Table_.
-    1. On the left bar, in _Data source_ choose the dats source with the `users` table.
-    1. In _Dimension_, choose `actor_login` as the only dimension.
-    1. In _Metric_, choose `commit_count` as the only metric.
-    1. In _Sort_, choose `commit_count` and click on _Descending_.
-1. Add the _Commits per day_ widget.
-    1. Click on the _Add a chart_ button on the top bar and select _Time series chart_.
-    1. On the left bar, in _Data source_ choose the dats source with the `stg_commits` table.
-    1. In _Dimension_, choose `created_at` as the only dimension.
-    1. In _Metric_, choose `Record Count` as the only metric.
 
-You should now have a functioning dashboard.
+
+
 
 _[Back to the repo index](https://github.com/ziritrion/dataeng-zoomcamp)_
